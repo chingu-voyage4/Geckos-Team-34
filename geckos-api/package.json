@@ -4,8 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node -- src/app.js",
-    "lint": "eslint src/"
+    "start": "nodemon --exec babel-node -- src/server.js",
+    "lint": "eslint src/",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watchAll"
   },
   "dependencies": {
     "dotenv": "^5.0.0",
@@ -17,6 +20,8 @@
     "babel-eslint": "^8.2.1",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.18.0",
-    "nodemon": "^1.15.0"
+    "jest": "^22.3.0",
+    "nodemon": "^1.15.0",
+    "supertest": "^3.0.0"
   }
 }
