@@ -13,6 +13,4 @@ mongoose.connect(
 
 app.use('/', routes);
 
-app.listen(8080, () => {
-  console.log('server started');
-});
+export default app;
