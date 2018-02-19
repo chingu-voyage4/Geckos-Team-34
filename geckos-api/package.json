@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon --exec babel-node -- src/server.js",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watchAll"
   },
   "dependencies": {
     "dotenv": "^5.0.0",
