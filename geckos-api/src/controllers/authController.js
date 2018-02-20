@@ -16,6 +16,17 @@ export const register = async(req, res) => {
     await user.save();
     handleResponse(res, 200, { status: 'success' });
   } catch(err) {
-    handleResponse(res, 400, { status: 'error' });
+    handleResponse(res, 500, { status: 'error' });
+  }
+};
+
+export const login = async(req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+
+  if (user && user.isValidPassword(password)) {
+    handleResponse(res, 200, { user: user.authUserJSON() });
+  } else {
+    handleResponse(res, 400, { errors: { global: 'Invalid email or password' } });
   }
 };
