@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dropdown, { Form, Button, Rating } from 'semantic-ui-react';
+import{ Dropdown, Form, Button, Rating, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 class MovieForm extends Component {
@@ -9,7 +9,8 @@ class MovieForm extends Component {
     plot: '',
     language: '',
     movieRating: '',
-    rating: 0
+    rating: 0,
+    releaseDate: ''
   }
 
   static propTypes = {
@@ -23,18 +24,20 @@ class MovieForm extends Component {
     stateObj[elem.name] = elem.value;
     this.setState(stateObj);
   }
-  onRateChange = (e, { rating }) => this.setState({ rating })
-
+  onRateChange = (e, { rating }) =>  {
+    this.setState({ rating })
+  }
   onSubmit = () => {
     this.props.submit(this.state);
   }
 
   render() {
-    const { title, plot, language, movieRating, director, rating } = this.state;
-
+    const { title, plot, language, movieRating, director, rating, releaseDate } = this.state;
+  
     return (
       <Form onSubmit={this.onSubmit}>
-        <Form.Field>
+      <Form.Group >
+        <Form.Field width={4}>
           <label htmlFor="title">Title</label>
           <input
             type="text"
@@ -45,7 +48,29 @@ class MovieForm extends Component {
             value={title}
           />
         </Form.Field>
-        <Form.Field>
+        <Form.Field width={2}>
+          <label htmlFor="releaseDate">Release Date</label>
+            <input
+              placeholder="2018"
+              type="text"
+              name="releaseDate"
+              id="releaseDate"
+              onChange={this.onInputChange}
+              value={releaseDate}
+            />
+        </Form.Field>
+      </Form.Group>
+        <label htmlFor="rating">Your rating</label>
+          <Rating   
+            defaultRating={1}
+            maxRating={5}
+            icon="star"
+            name="rating"
+            id="rating"
+            onRate={this.onRateChange}
+            >
+          </Rating>
+        <Form.Field width={4}>
           <label htmlFor="director">Director</label>
           <input
             type="text"
@@ -55,7 +80,7 @@ class MovieForm extends Component {
             value={director}
           />
         </Form.Field>
-        <Form.Field>
+        <Form.Field width={8}>
           <label htmlFor="plot">Plot</label>
           <textarea
             name="plot"
@@ -67,8 +92,8 @@ class MovieForm extends Component {
           >
           </textarea>
         </Form.Field>
-        <Form.Group widths='equal'>
-        <Form.Field>
+        <Form.Group>
+        <Form.Field width={2}>
           <label htmlFor="language">Language</label>
           <select
             name="language"
@@ -82,10 +107,10 @@ class MovieForm extends Component {
               <option value="chinese">Chinese</option>
            </select> 
         </Form.Field>
-        <Form.Field>
+        <Form.Field width={2}>
           <label htmlFor="movieRating">Rating</label>
           <select
-            name="movieRrating"
+            name="movieRating"
             id="movieRating"
             onChange={this.onInputChange}
             value={movieRating}
@@ -97,16 +122,6 @@ class MovieForm extends Component {
            </select> 
         </Form.Field>
         </Form.Group>
-          <Rating     
-            defaultRating={1}
-            maxRating={5}
-            icon='star'
-            name="rating"
-            id="rating"
-            onRate={this.onRateChange}
-            >
-          </Rating>
-       
         <Button primary>Add Movie</Button>
       </Form>
     );
