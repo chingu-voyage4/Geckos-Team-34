@@ -6,16 +6,19 @@ import Moviesdb from './Moviesdb';
 
 class MovieDisplay extends Component{
 renderMovieInfo(){
-  return _.map(Moviesdb, ({ Title, Year,Poster,Rated,Plot, Director,Writers }) => {
+  return _.map(Moviesdb, ({ Title, Year,Poster,Rated,Plot, Director,Writers,Actors }) => {
     return (
-      <div class="ui segment container">
-  <img class="ui small left floated circular  image" src={Poster}></img>
-  <h1>{Title}</h1>
-  <p>{Plot}</p>
+      <div className="ui main text segment container inverted">
+      
+  <img className="ui small left floated circular  image" src={Poster} alt="Poster"></img>
+  <h1 className="ui huge header">{Title}</h1>
   <p>Year: {Year}</p>
+  <p>{Plot}</p>
+  
   <p>Director: {Director}</p>
-  {/* how to render the writers one by one */}
+  
   <p>Writers: {Writers}</p>
+  <p>Actors: {Actors}</p>
   
 
   
