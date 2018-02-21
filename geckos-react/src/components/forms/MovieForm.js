@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImageUpload from '../imageUpload';
+import ImageUpload from '../ImageUpload';
 import { Dropdown, Form, Button, Rating, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
@@ -17,7 +17,8 @@ class MovieForm extends Component {
     actors: '',
     type: '',
     value: '',
-    producers: ''
+    producers: '',
+    image: ''
   }
 
   static propTypes = {
@@ -39,6 +40,9 @@ class MovieForm extends Component {
   }
   onSubmit = () => {
     this.props.submit(this.state);
+  }
+  myCallBack = (dataFromChild) => {
+   console.log(dataFromChild);
   }
 
   render() {
@@ -130,7 +134,7 @@ class MovieForm extends Component {
         <Form.Group inline>
           <label>Type</label>
           <Form.Radio label='Movie' name="movie" value="movie" checked={value === "movie"} onChange={this.onTypeChange} />
-          <Form.Radio label='TV' name="tv" value="tv" checked={this.state.value === "tv"} onChange={this.onTypeChange} />
+          <Form.Radio label='TV' name="tv" value="tv" checked={value === "tv"} onChange={this.onTypeChange} />
         </Form.Group>
         <Form.Group>
         <Form.Field width={2}>
@@ -162,7 +166,7 @@ class MovieForm extends Component {
           </select> 
         </Form.Field>
         </Form.Group>
-        <ImageUpload />
+        <ImageUpload callbackFromParent={this.myCallback} />
         <Button primary>Add Movie</Button>
       </Form>
     );

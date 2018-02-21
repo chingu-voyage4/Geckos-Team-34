@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Form, Input } from 'semantic-ui-react';
-
+import PropTypes from 'prop-types';
 
 class ImageUpload extends Component {
 
     state = {
-        file: '',
-        imagePreviewUrl: ''
-    };   
+      file: '',
+      imagePreviewUrl: ''
+    }
+  
     onImageChange = (e) => {
       e.preventDefault();
   
@@ -19,11 +20,14 @@ class ImageUpload extends Component {
           file: file,
           imagePreviewUrl: reader.result
         });
+      };
+      reader.readAsDataURL(file)
     }
-  
-    reader.readAsDataURL(file)
+    testFn = () => {
+      const listInfo = "hello";
+      this.props.callbackFromParent(listInfo);
     }
-  
+     
     render() {
       let {imagePreviewUrl} = this.state;
       let imagePreview = null;
@@ -35,7 +39,8 @@ class ImageUpload extends Component {
         <Form.Field width={4}>   
             <input
             type="file" 
-            onChange={this.onImageChange} />
+            onChange={this.someFn} />
+            <button onClick={this.testFn}>Hello</button>
             {imagePreview}
         </Form.Field>
       )
