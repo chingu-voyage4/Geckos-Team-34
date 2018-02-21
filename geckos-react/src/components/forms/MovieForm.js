@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import{ Dropdown, Form, Button, Rating, Input } from 'semantic-ui-react';
+import ImageUpload from '../imageUpload';
+import { Dropdown, Form, Button, Rating, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 class MovieForm extends Component {
@@ -10,7 +11,13 @@ class MovieForm extends Component {
     language: '',
     movieRating: '',
     rating: 0,
-    releaseDate: ''
+    releaseDate: '',
+    runTime: '',
+    genre: '',
+    actors: '',
+    type: '',
+    value: '',
+    producers: ''
   }
 
   static propTypes = {
@@ -27,12 +34,16 @@ class MovieForm extends Component {
   onRateChange = (e, { rating }) =>  {
     this.setState({ rating })
   }
+  onTypeChange = (e, { value }) => {
+    this.setState({ value })
+  }
   onSubmit = () => {
     this.props.submit(this.state);
   }
 
   render() {
-    const { title, plot, language, movieRating, director, rating, releaseDate } = this.state;
+    const { title, plot, language, movieRating, director, rating, releaseDate,
+            genre, actors, type, producers, value } = this.state;
   
     return (
       <Form onSubmit={this.onSubmit}>
@@ -60,6 +71,7 @@ class MovieForm extends Component {
             />
         </Form.Field>
       </Form.Group>
+      <Form.Group inline>
         <label htmlFor="rating">Your rating</label>
           <Rating   
             defaultRating={1}
@@ -70,6 +82,29 @@ class MovieForm extends Component {
             onRate={this.onRateChange}
             >
           </Rating>
+        </Form.Group>
+        <Form.Field width={4}>
+          <label htmlFor="genre">Genre</label>
+          <input
+            type="text"
+            id="genre"
+            name="genre"
+            placeholder="Action"
+            onChange={this.onInputChange}
+            value={genre}
+          />
+        </Form.Field>
+        <Form.Field width={4}>
+          <label htmlFor="producers">Producers</label>
+          <input
+            type="text"
+            id="producers"
+            name="producers"
+            placeholder="Some producer"
+            onChange={this.onInputChange}
+            value={producers}
+          />
+        </Form.Field>
         <Form.Field width={4}>
           <label htmlFor="director">Director</label>
           <input
@@ -92,6 +127,11 @@ class MovieForm extends Component {
           >
           </textarea>
         </Form.Field>
+        <Form.Group inline>
+          <label>Type</label>
+          <Form.Radio label='Movie' name="movie" value="movie" checked={value === "movie"} onChange={this.onTypeChange} />
+          <Form.Radio label='TV' name="tv" value="tv" checked={this.state.value === "tv"} onChange={this.onTypeChange} />
+        </Form.Group>
         <Form.Group>
         <Form.Field width={2}>
           <label htmlFor="language">Language</label>
@@ -105,7 +145,7 @@ class MovieForm extends Component {
               <option value="spanish">Spanish</option>
               <option value="french">French</option>
               <option value="chinese">Chinese</option>
-           </select> 
+          </select> 
         </Form.Field>
         <Form.Field width={2}>
           <label htmlFor="movieRating">Rating</label>
@@ -119,9 +159,10 @@ class MovieForm extends Component {
               <option value="pg">PG</option>
               <option value="pg-13">PG-13</option>
               <option value="r">R</option>
-           </select> 
+          </select> 
         </Form.Field>
         </Form.Group>
+        <ImageUpload />
         <Button primary>Add Movie</Button>
       </Form>
     );
