@@ -145,10 +145,10 @@ class MovieForm extends Component {
             onChange={this.onInputChange}
             value={language}
           >
-              <option value="english">English</option>
-              <option value="spanish">Spanish</option>
-              <option value="french">French</option>
-              <option value="chinese">Chinese</option>
+            <option value="english">English</option>
+            <option value="spanish">Spanish</option>
+            <option value="french">French</option>
+            <option value="chinese">Chinese</option>
           </select> 
         </Form.Field>
         <Form.Field width={2}>
@@ -159,10 +159,10 @@ class MovieForm extends Component {
             onChange={this.onInputChange}
             value={movieRating}
           >
-              <option value="g">G</option>
-              <option value="pg">PG</option>
-              <option value="pg-13">PG-13</option>
-              <option value="r">R</option>
+            <option value="g">G</option>
+            <option value="pg">PG</option>
+            <option value="pg-13">PG-13</option>
+            <option value="r">R</option>
           </select> 
         </Form.Field>
         </Form.Group>
