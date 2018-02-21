@@ -23,7 +23,9 @@ export const login = (credentials) => {
 
 export const logout = () => {
   return (dispatch) => {
+    // remove JWT from localStorage
     localStorage.removeItem('geckosJWT');
+    // dispatch an action for user logging out
     dispatch(userLoggedOut());
   };
 };
