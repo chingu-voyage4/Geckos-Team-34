@@ -12,7 +12,7 @@ class LoginPage extends Component {
   }
 
   submit = async(data) => {
-    this.props.login(data);
+    await this.props.login(data);
     this.props.history.push('/');
   }
 
