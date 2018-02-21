@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { func } from 'prop-types';
+import { connect } from 'react-redux';
 
+import { login } from '../../actions/auth';
 import LoginForm from '../forms/LoginForm';
 
 class LoginPage extends Component {
+  static propTypes = {
+    login: func.isRequired
+  }
 
   submit = async(data) => {
-    console.log(data);
+    this.props.login(data);
   }
 
   render() {
@@ -18,4 +24,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default connect(null, { login })(LoginPage);
