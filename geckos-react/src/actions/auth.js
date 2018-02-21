@@ -1,9 +1,13 @@
 import api from '../api';
-import { USER_LOGGED_IN } from '../types';
+import { USER_LOGGED_IN, USER_LOGGED_OUT } from '../types';
 
 export const userLoggedIn = (user) => ({
   type: USER_LOGGED_IN,
   user
+});
+
+export const userLoggedOut = () => ({
+  type: USER_LOGGED_OUT
 });
 
 export const login = (credentials) => {
@@ -14,5 +18,12 @@ export const login = (credentials) => {
     localStorage.geckosJWT = user.token;
     // dispatch an action for user logging in
     dispatch(userLoggedIn(user));
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    localStorage.removeItem('geckosJWT');
+    dispatch(userLoggedOut());
   };
 };
