@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func } from 'prop-types';
+import { func, shape } from 'prop-types';
 import { connect } from 'react-redux';
 
 import { login } from '../../actions/auth';
@@ -7,11 +7,13 @@ import LoginForm from '../forms/LoginForm';
 
 class LoginPage extends Component {
   static propTypes = {
-    login: func.isRequired
+    login: func.isRequired,
+    history: shape({ push: func })
   }
 
   submit = async(data) => {
     this.props.login(data);
+    this.props.history.push('/');
   }
 
   render() {
