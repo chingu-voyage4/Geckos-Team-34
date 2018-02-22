@@ -52,8 +52,8 @@ class MovieForm extends Component {
 
   render() {
     const { title, plot, language, movieRating, director, rating, releaseDate,
-      genre, actors, type, producers, value, runTime } = this.state; 
-  
+      genre, actors, type, producers, value, runTime } = this.state;
+
     return (
       <Form onSubmit={this.onSubmit}>
         <Form.Group >
@@ -100,7 +100,7 @@ class MovieForm extends Component {
         </Form.Group>
         <Form.Group inline>
           <label htmlFor="rating">Your rating</label>
-          <Rating   
+          <Rating
             defaultRating={1}
             maxRating={5}
             icon="star"
@@ -170,7 +170,7 @@ class MovieForm extends Component {
               <option value="spanish">Spanish</option>
               <option value="french">French</option>
               <option value="chinese">Chinese</option>
-            </select> 
+            </select>
           </Form.Field>
           <Form.Field width={2}>
             <label htmlFor="movieRating">Rating</label>
@@ -184,7 +184,7 @@ class MovieForm extends Component {
               <option value="pg">PG</option>
               <option value="pg-13">PG-13</option>
               <option value="r">R</option>
-            </select> 
+            </select>
           </Form.Field>
         </Form.Group>
         <ImageUpload callbackFromParent={this.myCallback} />
