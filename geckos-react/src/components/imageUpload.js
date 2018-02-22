@@ -25,10 +25,8 @@ class ImageUpload extends Component {
       reader.readAsDataURL(file)
     }
     testFn = () => {
-      const hey = this.props;
-      const info = this.state.testInfo;
-      console.log(hey);
-      this.props(info);
+      const info = "Hello";
+      this.props.callbackFromParent(info);
     }
      
     render() {

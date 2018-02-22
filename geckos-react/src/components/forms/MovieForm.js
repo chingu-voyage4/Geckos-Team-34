@@ -45,7 +45,7 @@ class MovieForm extends Component {
   onSubmit = () => {
     this.props.submit(this.state);
   }
-  
+
   myCallBack = (dataFromChild) => {
    console.log(dataFromChild);
   }
@@ -73,6 +73,7 @@ class MovieForm extends Component {
             <input
               placeholder="2018"
               type="text"
+              maxLength={4}
               name="releaseDate"
               id="releaseDate"
               onChange={this.onInputChange}
@@ -84,6 +85,7 @@ class MovieForm extends Component {
             <input
               placeholder="120"
               type="text"
+              maxLength={3}
               name="runTime"
               id="runtime"
               onChange={this.onInputChange}
