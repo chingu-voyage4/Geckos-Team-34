@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImageUpload from '../ImageUpload';
+import ImageUpload from '../imageUpload';
 import { Form, Button, Rating } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
