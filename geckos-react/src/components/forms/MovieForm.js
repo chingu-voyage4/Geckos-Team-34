@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import{ Dropdown, Form, Button, Rating, Input } from 'semantic-ui-react';
 import ImageUpload from '../imageUpload';
-import { Form, Button, Rating } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 class MovieForm extends Component {
@@ -11,15 +11,9 @@ class MovieForm extends Component {
     language: '',
     movieRating: '',
     rating: 0,
-    releaseDate: '',
-    runTime: '',
     genre: '',
-    actors: '',
-    type: '',
-    value: '',
-    producers: '',
-    image: '',
-    runTime: ''
+    releaseDate: '',
+    producers: ''
   }
 
   static propTypes = {
@@ -52,7 +46,7 @@ class MovieForm extends Component {
 
   render() {
     const { title, plot, language, movieRating, director, rating, releaseDate,
-      genre, actors, type, producers, value, runTime } = this.state;
+      genre, type, producers, value, runTime } = this.state;
 
     return (
       <Form onSubmit={this.onSubmit}>
