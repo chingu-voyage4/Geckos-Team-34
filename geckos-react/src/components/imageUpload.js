@@ -6,15 +6,18 @@ class ImageUpload extends Component {
 
     state = {
       file: '',
-      imagePreviewUrl: '',
-      testInfo: "hello"
+      imagePreviewUrl: ''
+    }
+
+    static propTypes = {
+      imgFile: PropTypes.func
     }
 
     onImageChange = (e) => {
       e.preventDefault();
 
-      let reader = new FileReader();
-      let file = e.target.files[0];
+      const reader = new FileReader();
+      const file = e.target.files[0];
 
       reader.onloadend = () => {
         this.setState({
@@ -22,35 +25,33 @@ class ImageUpload extends Component {
           imagePreviewUrl: reader.result
         });
       };
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(file);
+
     }
 
-    testFn = () => {
-      const info = "Hello";
-      this.props.callbackFromParent(info);
-    }
+    sendFileInfo = () => {
+      const fileInfo = this.state.file;
+      this.props.imgFile(fileInfo);
+    };
 
     render() {
-      let {imagePreviewUrl} = this.state;
+      const { imagePreviewUrl } = this.state;
       let imagePreview = null;
       if (imagePreviewUrl) {
-        imagePreview = (<img src={imagePreviewUrl} />);
+        imagePreview = (<img src={imagePreviewUrl} alt="user movie poster" />);
       }
 
       return (
         <Form.Field width={4}>
           <input
             type="file"
+            accept=".png, .jpg, .jpeg"
             onChange={this.onImageChange} />
-          <button onClick={this.testFn}>Hello</button>
+          <button onClick={this.sendFileInfo}>Upload</button>
           {imagePreview}
         </Form.Field>
       );
     }
-}
-
-ImageUpload.propTypes = {
-  callbackFromParent: PropTypes.func
 }
 
 export default ImageUpload;
