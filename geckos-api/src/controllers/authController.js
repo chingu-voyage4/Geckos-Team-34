@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import validator from 'validator';
 
 import User from '../models/User';
 
@@ -8,6 +9,21 @@ function handleResponse(res, code, statusObj) {
 
 export const register = async(req, res) => {
   const { username, email, password } = req.body;
+
+  const validationErrors = {};
+  if (!validator.isLength(username, { min: 6, max: 16 })) {
+    validationErrors.username = 'Username must be between 6-16 characters.';
+  }
+  if (!email) validationErrors.email = 'Email required.';
+  if (!validator.isEmail(email)) validationErrors.email = 'Email is not valid';
+  if (!validator.isLength(password, { min: 6, max: 18 })) {
+    validationErrors.password = 'Password must be between 6-18 characters.';
+  }
+
+  if (Object.keys(validationErrors).length > 0) {
+    handleResponse(res, 417, { status: 'error', details: validationErrors });
+  }
+
   const salt = bcrypt.genSaltSync();
   const passwordHash = bcrypt.hashSync(password, salt);
   const user = User({ username, email, passwordHash });
