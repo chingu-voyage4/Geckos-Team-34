@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import{ Dropdown, Form, Button, Rating, Input } from 'semantic-ui-react';
+import{ Form, Button, Rating } from 'semantic-ui-react';
 import ImageUpload from '../imageUpload';
 import PropTypes from 'prop-types';
 
@@ -29,24 +29,28 @@ class MovieForm extends Component {
   }
 
   onRateChange = (e, { rating }) =>  {
-    this.setState({ rating })
+    const stateObj = { rating };
+    this.setState(stateObj);
   }
 
   onTypeChange = (e, { value }) => {
-    this.setState({ value })
+    const stateObj = { type: value };
+    this.setState(stateObj);
   }
 
   onSubmit = () => {
     this.props.submit(this.state);
   }
 
-  myCallBack = (dataFromChild) => {
-   console.log(dataFromChild);
+  getImgFile = (imgFile) => {
+    console.log(imgFile);
+    const stateObj = { uploadedImage: imgFile };
+    this.setState(stateObj);
   }
 
   render() {
-    const { title, plot, language, movieRating, director, rating, releaseDate,
-      genre, type, producers, value, runTime } = this.state;
+    const { title, plot, language, movieRating, director, releaseDate,
+      genre, producers, runTime } = this.state;
 
     return (
       <Form onSubmit={this.onSubmit}>
@@ -81,7 +85,7 @@ class MovieForm extends Component {
               type="text"
               maxLength={3}
               name="runTime"
-              id="runtime"
+              id="runTime"
               onChange={this.onInputChange}
               value={runTime}
             />
@@ -89,8 +93,18 @@ class MovieForm extends Component {
         </Form.Group>
         <Form.Group inline>
           <label>Type</label>
-          <Form.Radio label='Movie' name="movie" value="movie" checked={value === "movie"} onChange={this.onTypeChange} />
-          <Form.Radio label='TV' name="tv" value="tv" checked={value === "tv"} onChange={this.onTypeChange} />
+          <Form.Radio label='Movie'
+            name="type"
+            value="movie"
+            checked={this.state.type === "movie"}
+            onChange={this.onTypeChange}
+          />
+          <Form.Radio label='TV'
+            name="type"
+            value="tv"
+            checked={this.state.type === "tv"}
+            onChange={this.onTypeChange}
+          />
         </Form.Group>
         <Form.Group inline>
           <label htmlFor="rating">Your rating</label>
@@ -181,7 +195,7 @@ class MovieForm extends Component {
             </select>
           </Form.Field>
         </Form.Group>
-        <ImageUpload callbackFromParent={this.myCallback} />
+        <ImageUpload imgFile={this.getImgFile} />
         <Button primary>Add Movie</Button>
       </Form>
     );
