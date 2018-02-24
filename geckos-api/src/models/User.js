@@ -22,6 +22,11 @@ const schema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
+schema.methods.hashPassword = function hashPassword(password) {
+  const salt = bcrypt.genSaltSync();
+  this.passwordHash = bcrypt.hashSync(password, salt);
+};
+
 schema.methods.isValidPassword = function isValidPassword(password) {
   return bcrypt.compareSync(password, this.passwordHash);
 };

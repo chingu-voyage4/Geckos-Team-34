@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import validator from 'validator';
 
 import User from '../models/User';
@@ -24,9 +23,8 @@ export const register = async(req, res) => {
     handleResponse(res, 417, { status: 'error', details: validationErrors });
   }
 
-  const salt = bcrypt.genSaltSync();
-  const passwordHash = bcrypt.hashSync(password, salt);
-  const user = User({ username, email, passwordHash });
+  const user = User({ username, email });
+  user.hashPassword(password);
 
   try {
     await user.save();
