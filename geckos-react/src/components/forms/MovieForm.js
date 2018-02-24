@@ -13,7 +13,7 @@ class MovieForm extends Component {
     rating: 0,
     genre: '',
     releaseDate: '',
-    producers: ''
+    producers: '',
   }
 
   static propTypes = {
@@ -43,7 +43,6 @@ class MovieForm extends Component {
   }
 
   getImgFile = (imgFile) => {
-    console.log(imgFile);
     const stateObj = { uploadedImage: imgFile };
     this.setState(stateObj);
   }

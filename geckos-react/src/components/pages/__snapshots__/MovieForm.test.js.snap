@@ -247,7 +247,7 @@ exports[`<MovieForm /> should render correctly 1`] = `
     </FormField>
   </FormGroup>
   <ImageUpload
-    callbackFromParent={[Function]}
+    imgFile={[Function]}
   />
   <Button
     as="button"
