@@ -13,7 +13,7 @@ class LoginPage extends Component {
 
   submit = async(data) => {
     await this.props.login(data);
-    this.props.history.push('/');
+    this.props.history.push('/dashboard');
   }
 
   render() {
