@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MovieFormPage /> should render correctly 1`] = `
+<div
+  className="ui container"
+>
+  <h1>
+    Add a movie
+  </h1>
+  <MovieForm
+    submit={[Function]}
+  />
+</div>
+`;
