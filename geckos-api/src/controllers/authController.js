@@ -30,7 +30,7 @@ export const register = async(req, res) => {
     await user.save();
     handleResponse(res, 200, { status: 'success' });
   } catch(err) {
-    handleResponse(res, 500, { status: 'error' });
+    handleResponse(res, 500, { status: 'error', message: err });
   }
 };
 

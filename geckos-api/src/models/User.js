@@ -19,6 +19,10 @@ const schema = new mongoose.Schema({
   passwordHash: {
     type: String,
     required: true
+  },
+  confirmed: {
+    type: Boolean,
+    default: false
   }
 }, { timestamps: true });
 
@@ -38,6 +42,7 @@ schema.methods.createJWT = function createJWT() {
 schema.methods.authUserJSON = function authUserJSON() {
   return {
     email: this.email,
+    confirmed: this.confirmed,
     token: this.createJWT()
   };
 };
