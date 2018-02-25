@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import{ Form, Button, Rating } from 'semantic-ui-react';
-import ImageUpload from '../imageUpload';
+import ImageUpload from '../ImageUpload';
 import PropTypes from 'prop-types';
 
 class MovieForm extends Component {
