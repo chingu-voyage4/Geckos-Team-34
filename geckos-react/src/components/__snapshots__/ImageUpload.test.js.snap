@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImageUpload /> should render correctly 1`] = `
+<FormField
+  width={4}
+>
+  <input
+    accept=".png, .jpg, .jpeg"
+    id="file"
+    name="file"
+    onChange={[Function]}
+    type="file"
+  />
+  <button
+    className="ui button"
+    onClick={[Function]}
+  >
+    <i
+      className="upload icon"
+    />
+    Upload
+  </button>
+</FormField>
+`;

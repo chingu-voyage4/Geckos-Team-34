@@ -14,8 +14,7 @@ class ImageUpload extends Component {
     }
 
     onImageChange = (e) => {
-      e.preventDefault();
-
+      console.log(e.target);
       const reader = new FileReader();
       const file = e.target.files[0];
 
@@ -26,7 +25,6 @@ class ImageUpload extends Component {
         });
       };
       reader.readAsDataURL(file);
-
     }
 
     sendFileInfo = () => {
@@ -44,10 +42,12 @@ class ImageUpload extends Component {
       return (
         <Form.Field width={4}>
           <input
+            name="file"
+            id="file"
             type="file"
             accept=".png, .jpg, .jpeg"
             onChange={this.onImageChange} />
-          <button onClick={this.sendFileInfo}>Upload</button>
+          <button className="ui button" onClick={this.sendFileInfo}><i className="upload icon"></i>Upload</button>
           {imagePreview}
         </Form.Field>
       );
