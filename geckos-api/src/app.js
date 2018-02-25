@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 import routes from './routes';
+import authRoutes from './routes/auth';
 
 dotenv.config();
 const app = express();
@@ -18,5 +19,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', routes);
+app.use('/auth', authRoutes);
 
 export default app;
