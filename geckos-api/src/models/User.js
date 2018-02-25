@@ -23,12 +23,24 @@ const schema = new mongoose.Schema({
   confirmed: {
     type: Boolean,
     default: false
+  },
+  confirmationToken: {
+    type: String,
+    default: ''
   }
 }, { timestamps: true });
 
 schema.methods.hashPassword = function hashPassword(password) {
   const salt = bcrypt.genSaltSync();
   this.passwordHash = bcrypt.hashSync(password, salt);
+};
+
+schema.methods.setConfirmationToken = function setConfirmationToken() {
+  this.confirmationToken = this.createJWT();
+};
+
+schema.methods.generateConfirmationURL = function generateConfirmationURL() {
+  return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
 };
 
 schema.methods.isValidPassword = function isValidPassword(password) {

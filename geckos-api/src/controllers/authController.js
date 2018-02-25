@@ -1,6 +1,7 @@
 import validator from 'validator';
 
 import User from '../models/User';
+import { sendConfirmationEmail } from '../mailer';
 
 function handleResponse(res, code, statusObj) {
   res.status(code).json(statusObj);
@@ -24,10 +25,12 @@ export const register = async(req, res) => {
   }
 
   const user = User({ username, email });
+  user.setConfirmationToken();
   user.hashPassword(password);
 
   try {
-    await user.save();
+    const newUser = await user.save();
+    sendConfirmationEmail(newUser);
     handleResponse(res, 200, { status: 'success' });
   } catch(err) {
     handleResponse(res, 500, { status: 'error', message: err });
