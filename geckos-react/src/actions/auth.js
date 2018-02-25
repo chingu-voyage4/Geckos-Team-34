@@ -29,3 +29,11 @@ export const logout = () => {
     dispatch(userLoggedOut());
   };
 };
+
+export const confirm = (token) => {
+  return async(dispatch) => {
+    const user = await api.user.confirm(token);
+    localStorage.geckosJWT = user.token;
+    dispatch(userLoggedIn(user));
+  };
+};

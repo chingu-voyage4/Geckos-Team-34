@@ -11,6 +11,11 @@ export default {
       const response = await axios.post('/auth/register', data);
       const apiResp = response.data;
       return apiResp;
+    },
+    confirm: async(token) => {
+      const response = await axios.post('/auth/confirmation', { token });
+      const apiResp = response.data;
+      return apiResp;
     }
   }
 };

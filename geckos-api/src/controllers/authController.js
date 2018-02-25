@@ -47,3 +47,19 @@ export const login = async(req, res) => {
     handleResponse(res, 400, { errors: { global: 'Invalid email or password' } });
   }
 };
+
+export const confirm = async(req, res) => {
+  const { token } = req.body;
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { confirmationToken: token },
+      { confirmationToken: '', confirmed: true },
+      { new: true }
+    );
+
+    handleResponse(res, 200, { user: user.authUserJSON() });
+  } catch(err) {
+    handleResponse(res, 400, { status: 'error', message: err });
+  }
+};

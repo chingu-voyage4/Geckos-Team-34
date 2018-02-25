@@ -9,6 +9,7 @@ import LoginPage from './components/pages/LoginPage';
 import MovieFormPage from './components/pages/MovieFormPage';
 import RegisterPage from './components/pages/RegisterPage';
 import DashboardPage from './components/pages/DashboardPage';
+import ConfirmationPage from './components/pages/ConfirmationPage';
 
 const propTypes = {
   location: shape({
@@ -23,6 +24,7 @@ const App = ({ location }) => {
       <UserRoute location={location} path='/dashboard' component={DashboardPage} exact />
       <GuestRoute location={location} path='/login' component={LoginPage} exact />
       <Route location={location} path='/register' component={RegisterPage} exact />
+      <Route location={location} path='/confirmation/:token' component={ConfirmationPage} exact />
       <Route location={location} path='/movie/add' component={MovieFormPage} exact />
     </div>
   );
