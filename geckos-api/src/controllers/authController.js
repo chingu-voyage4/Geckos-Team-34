@@ -52,13 +52,13 @@ export const confirm = async(req, res) => {
   const { token } = req.body;
 
   try {
-    const user = await User.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { confirmationToken: token },
       { confirmationToken: '', confirmed: true },
       { new: true }
     );
 
-    handleResponse(res, 200, { user: user.authUserJSON() });
+    handleResponse(res, 200, { status: 'success' });
   } catch(err) {
     handleResponse(res, 400, { status: 'error', message: err });
   }

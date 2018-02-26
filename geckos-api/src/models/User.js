@@ -48,7 +48,10 @@ schema.methods.isValidPassword = function isValidPassword(password) {
 };
 
 schema.methods.createJWT = function createJWT() {
-  return jwt.sign({ email: this.email }, process.env.JWT_SECRET || 'mysecretsecret1');
+  return jwt.sign({
+    email: this.email,
+    confirmed: this.confirmed
+  }, process.env.JWT_SECRET || 'mysecretsecret1');
 };
 
 schema.methods.authUserJSON = function authUserJSON() {

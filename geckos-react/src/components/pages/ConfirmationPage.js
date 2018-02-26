@@ -45,7 +45,7 @@ class ConfirmationPoint extends Component {
               <Icon name="checkmark" />
               <Message.Content>
                 <Message.Header>Your profile has been verified!</Message.Header>
-                <Link to='/dashboard'>Go to dashboard</Link>
+                <Link to='/login'>Login now</Link>
               </Message.Content>
             </Message>
         }

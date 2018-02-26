@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import decode from 'jwt-decode';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -20,8 +21,11 @@ const store = createStore(
 );
 
 if (localStorage.geckosJWT) {
+  const payload = decode(localStorage.geckosJWT);
   const user = {
     token: localStorage.geckosJWT,
+    email: payload.email,
+    confirmed: payload.confirmed
   };
   store.dispatch(userLoggedIn(user));
 }
