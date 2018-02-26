@@ -14,6 +14,8 @@ class MovieForm extends Component {
     genre: '',
     releaseDate: '',
     producers: '',
+    runTime: '',
+    type: ''
   }
 
   static propTypes = {
@@ -34,6 +36,7 @@ class MovieForm extends Component {
   }
 
   onTypeChange = (e, { value }) => {
+    console.log(value);
     const stateObj = { type: value };
     this.setState(stateObj);
   }
