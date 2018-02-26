@@ -1,7 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import MovieForm from '../forms/MovieForm';
+import Embed from 'semantic-ui-react';
 
 describe('<MovieForm />', () => {
   let wrapper;
@@ -48,29 +49,36 @@ describe('<MovieForm />', () => {
   });
 
   it('should render a type radio input and update the components state.type value onChange', () => {
-    const elem = wrapper.find('#director');
+    const elemMovie = wrapper.find('[value="movie"]');
+    const elemTV = wrapper.find('[value="tv"]');
 
-    elem.simulate('change', { target: { name: 'type', value: 'movie' } });
 
-    expect(elem.length).toBe(1);
+    elemMovie.simulate('change', {
+      target: { name: 'type', checked: true }
+    });
+
+    expect(elemMovie.length).toBe(1);
+    expect(elemTV.length).toBe(1);
     expect(wrapper.state('type')).toEqual('movie');
   });
 
   it('should render a star rating input', () => {
     const elem = wrapper.find('#rating');
 
-    elem.simulate('select', { name: 'rating', target: { value: 0 } });
+  //  elem.simulate('select', { name: 'rating', target: { value: 0 } });
+    elem.simulate('rate', { target: { value: 1 } });
 
-    expect(wrapper.state('rating')).toEqual(0);
+
+    expect(wrapper.state('rating')).toEqual(1);
     expect(elem.length).toBe(1);
   });
 
   it('should render a genre input and update the components state.genre value onChange', () => {
     const elem = wrapper.find('#genre');
 
-    elem.simulate('change', { target: { name: 'genre', value: 'genre' } });
+    elem.simulate('change', { target: { name: 'genre', value: 'action' } });
 
-    expect(wrapper.state('genre')).toEqual('genre');
+    expect(wrapper.state('genre')).toEqual('action');
     expect(elem.length).toBe(1);
   });
 
