@@ -14,7 +14,7 @@ class ImageUpload extends Component {
     }
 
     onImageChange = (e) => {
-      console.log(e.target);
+      console.log(e.target.files[0]);
       const reader = new FileReader();
       const file = e.target.files[0];
 
@@ -30,7 +30,7 @@ class ImageUpload extends Component {
     sendFileInfo = () => {
       const fileInfo = this.state.file;
       this.props.imgFile(fileInfo);
-    };
+    }
 
     render() {
       const { imagePreviewUrl } = this.state;
