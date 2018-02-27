@@ -21,6 +21,16 @@ export default {
       const response = await axios.post('/auth/password_reset', { email });
       const apiResp = response.data;
       return apiResp;
+    },
+    validateToken: async(token) => {
+      const response = await axios.post('/auth/validate_token', { token });
+      const apiResp = response.data;
+      return apiResp;
+    },
+    resetUserPassword: async(data) => {
+      const response = await axios.post('/auth/reset_user_password', data);
+      const apiResp = response.data;
+      return apiResp;
     }
   }
 };

@@ -40,7 +40,7 @@ schema.methods.setConfirmationToken = function setConfirmationToken() {
 };
 
 schema.methods.createResetPasswordToken = function createResetPasswordToken() {
-  return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: "1s" });
+  return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 };
 
 schema.methods.generateConfirmationURL = function generateConfirmationURL() {

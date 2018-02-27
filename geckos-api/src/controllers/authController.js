@@ -1,4 +1,5 @@
 import validator from 'validator';
+import jwt from 'jsonwebtoken';
 
 import User from '../models/User';
 import { sendConfirmationEmail, sendResetPasswordEmail } from '../mailer';
@@ -72,4 +73,32 @@ export const resetPassword = async(req, res) => {
   } catch(err) {
     handleResponse(res, 400, { status: 'error', message: 'Can\'t find user with provided email.' });
   }
+};
+
+export const validateToken = (req, res) => {
+  jwt.verify(req.body.token, process.env.JWT_SECRET, (err) => {
+    if (err) {
+      handleResponse(res, 401, {});
+    } else {
+      handleResponse(res, 200, {});
+    }
+  });
+};
+
+export const resetUserPassword = async(req, res) => {
+  const { password, token } = req.body;
+  jwt.verify(token, process.env.JWT_SECRET, async(err, decoded) => {
+    if (err) {
+      handleResponse(res, 401, { status: 'error', errors: { global: 'Invalid token.' } });
+    } else {
+      try {
+        const user = await User.findOne({ _id: decoded._id });
+        user.hashPassword(password);
+        user.save();
+        handleResponse(res, 200, {});
+      } catch(err) {
+        handleResponse(res, 404, { status: 'error', errors: { global: 'Invalid token.' } });
+      }
+    }
+  });
 };

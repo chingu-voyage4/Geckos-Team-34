@@ -39,8 +39,20 @@ export const confirm = (token) => {
 };
 
 export const resetPassword = ({ email }) => {
-  return async(dispatch) => {
+  return async() => {
     const response = await api.user.resetPassword(email);
     console.log(response);
+  };
+};
+
+export const validateToken = (token) => {
+  return async() => {
+    await api.user.validateToken(token);
+  };
+};
+
+export const resetUserPassword = (data) => {
+  return async() => {
+    await api.user.resetUserPassword(data);
   };
 };

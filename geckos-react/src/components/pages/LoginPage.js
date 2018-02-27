@@ -22,7 +22,7 @@ class LoginPage extends Component {
       <div className="ui container">
         <h1>Login</h1>
         <LoginForm submit={this.submit} />
-        <Link to="/password_reset">Forgot your password?</Link>
+        <Link to="/password_forgot">Forgot your password?</Link>
       </div>
     );
   }
