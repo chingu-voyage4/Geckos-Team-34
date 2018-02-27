@@ -3,7 +3,7 @@ import { func } from 'prop-types';
 import { Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import PasswordResetForm from '../forms/PasswordResetForm';
+import PasswordForgotForm from '../forms/PasswordForgotForm';
 import { resetPassword } from '../../actions/auth';
 
 class PasswordResetPage extends Component {
@@ -26,7 +26,7 @@ class PasswordResetPage extends Component {
           this.state.success ?
             <Message>Check your email.</Message>
             :
-            <PasswordResetForm submit={this.submit} />
+            <PasswordForgotForm submit={this.submit} />
         }
       </div>
     );
