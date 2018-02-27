@@ -1,14 +1,13 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import MovieForm from '../forms/MovieForm';
-import Embed from 'semantic-ui-react';
+import MovieForm from './MovieForm';
 
 describe('<MovieForm />', () => {
   let wrapper;
-  const props =  () => {};
+  const submit = jest.fn();
   beforeEach(() => {
-    wrapper = shallow(<MovieForm submit={ props } />);
+    wrapper = shallow(<MovieForm submit={submit} />);
   });
 
   it('should render correctly', () => {
@@ -49,27 +48,25 @@ describe('<MovieForm />', () => {
   });
 
   it('should render a type radio input and update the components state.type value onChange', () => {
-    const elemMovie = wrapper.find('[value="movie"]');
-    const elemTV = wrapper.find('[value="tv"]');
+    wrapper = mount(<MovieForm submit={jest.fn()} />);
+    const elemMovie = wrapper.find('Radio[value="movie"]');
+    const elemTV = wrapper.find('Radio[value="tv"]');
 
-
-    elemMovie.simulate('change', {
+    elemTV.simulate('change', {
       target: { name: 'type', checked: true }
     });
 
     expect(elemMovie.length).toBe(1);
     expect(elemTV.length).toBe(1);
-    expect(wrapper.state('type')).toEqual('movie');
+    expect(wrapper.state('type')).toEqual('tv');
   });
 
   it('should render a star rating input', () => {
-    const elem = wrapper.find('#rating');
+    wrapper = mount(<MovieForm submit={jest.fn()} />);
+    const elem = wrapper.find('#rating').at(0);
+    elem.find('RatingIcon').at(3).simulate('click');
 
-  //  elem.simulate('select', { name: 'rating', target: { value: 0 } });
-    elem.simulate('rate', { target: { value: 1 } });
-
-
-    expect(wrapper.state('rating')).toEqual(1);
+    expect(wrapper.state('rating')).toEqual(4);
     expect(elem.length).toBe(1);
   });
 
@@ -121,6 +118,25 @@ describe('<MovieForm />', () => {
 
     expect(elem.length).toBe(1);
     expect(wrapper.state('movieRating')).toEqual('g');
+  });
+
+  it('should call submit', () => {
+    wrapper.setState({ title: 'Test title' });
+    wrapper.find('Form').simulate('submit');
+    expect(submit).toHaveBeenCalled();
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should call onInputChange', () => {
+    const instance = wrapper.instance();
+    instance.onInputChange({ target: { name: 'title', value: 'sometest' } });
+    expect(wrapper.state().title).toBe('sometest');
+  });
+
+  it('should call getImgFile', () => {
+    const instance = wrapper.instance();
+    instance.getImgFile('local.jpg');
+    expect(wrapper.state().uploadedImage).toBe('local.jpg');
   });
 
 });
