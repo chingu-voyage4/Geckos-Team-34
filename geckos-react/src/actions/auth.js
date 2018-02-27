@@ -37,3 +37,10 @@ export const confirm = (token) => {
     dispatch(userLoggedIn(user));
   };
 };
+
+export const resetPassword = ({ email }) => {
+  return async(dispatch) => {
+    const response = await api.user.resetPassword(email);
+    console.log(response);
+  };
+};

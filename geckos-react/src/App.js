@@ -10,6 +10,7 @@ import MovieFormPage from './components/pages/MovieFormPage';
 import RegisterPage from './components/pages/RegisterPage';
 import DashboardPage from './components/pages/DashboardPage';
 import ConfirmationPage from './components/pages/ConfirmationPage';
+import PasswordResetPage from './components/pages/PasswordResetPage';
 
 const propTypes = {
   location: shape({
@@ -25,6 +26,7 @@ const App = ({ location }) => {
       <GuestRoute location={location} path='/login' component={LoginPage} exact />
       <Route location={location} path='/register' component={RegisterPage} exact />
       <Route location={location} path='/confirmation/:token' component={ConfirmationPage} exact />
+      <GuestRoute location={location} path='/password_reset' component={PasswordResetPage} exact />
       <Route location={location} path='/movie/add' component={MovieFormPage} exact />
     </div>
   );

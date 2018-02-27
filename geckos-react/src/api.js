@@ -16,6 +16,11 @@ export default {
       const response = await axios.post('/auth/confirmation', { token });
       const apiResp = response.data;
       return apiResp;
+    },
+    resetPassword: async(email) => {
+      const response = await axios.post('/auth/password_reset', { email });
+      const apiResp = response.data;
+      return apiResp;
     }
   }
 };

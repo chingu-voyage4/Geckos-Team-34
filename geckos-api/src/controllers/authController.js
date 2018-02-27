@@ -1,7 +1,7 @@
 import validator from 'validator';
 
 import User from '../models/User';
-import { sendConfirmationEmail } from '../mailer';
+import { sendConfirmationEmail, sendResetPasswordEmail } from '../mailer';
 
 function handleResponse(res, code, statusObj) {
   res.status(code).json(statusObj);
@@ -61,5 +61,15 @@ export const confirm = async(req, res) => {
     handleResponse(res, 200, { status: 'success' });
   } catch(err) {
     handleResponse(res, 400, { status: 'error', message: err });
+  }
+};
+
+export const resetPassword = async(req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    sendResetPasswordEmail(user);
+    handleResponse(res, 200, { status: 'success' });
+  } catch(err) {
+    handleResponse(res, 400, { status: 'error', message: 'Can\'t find user with provided email.' });
   }
 };
