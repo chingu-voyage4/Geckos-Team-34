@@ -127,6 +127,22 @@ describe('<MovieForm />', () => {
     expect(submit).toHaveBeenCalled();
   });
 
+  it('should show error messages with invalid inputs on submit', () => {
+    const wrapper = mount(<MovieForm submit={submit} />);
+    wrapper.setState({ title: '', producers: '',
+      director: '', plot: "", genre: "", runTime: 'abc', releaseDate: 'abcd' });
+    wrapper.find('Form').simulate('submit');
+    const error = wrapper.find('span');
+
+    expect(error.at(0).text()).toEqual('Invalid movie title');
+    expect(error.at(1).text()).toEqual('Numbers only please');
+    expect(error.at(2).text()).toEqual('Numbers only please');
+    expect(error.at(3).text()).toEqual('Invalid genre type');
+    expect(error.at(4).text()).toEqual('Invalid director name');
+    expect(error.at(5).text()).toEqual('Invalid producer name');
+    expect(error.at(6).text()).toEqual('Hey, you need to add a plot');
+  });
+
   it('should call onInputChange', () => {
     const instance = wrapper.instance();
     instance.onInputChange({ target: { name: 'title', value: 'sometest' } });
