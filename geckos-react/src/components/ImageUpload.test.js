@@ -2,13 +2,13 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import ImageUpload from './ImageUpload';
-import MovieForm from './forms/MovieForm';
 
 describe('<ImageUpload />', () => {
   let wrapper;
+  const newFile = new File(['file contents'], "filename");
 
   beforeEach(() => {
-    wrapper = shallow( <ImageUpload imgFile={() => {} } />);
+    wrapper = shallow(<ImageUpload imgFile={jest.fn()} />);
   });
 
   it('should render correctly', () => {
@@ -17,21 +17,29 @@ describe('<ImageUpload />', () => {
   });
 
   it('should render a file input and update the components state with file info', () => {
-    const newFile = new File(['file contents'], "filename");
-    const newBlob = new Blob(['file contents'], { type : 'jpg/png' });
-
-
     const elem = wrapper.find('#file');
-    elem.simulate('change', { name: 'file', target: { files: [newBlob] } });
+
+    elem.simulate('change', { target: { name: 'file', files: 'test.jpg' } });
 
     expect(elem.length).toBe(1);
-    expect(wrapper.state('file')).toEqual( new Blob );
+    expect(wrapper.state().file).toEqual('test.jpg');
   });
 
-  it('should render a button input and send file data ', () => {
+  it('should render a button input', () => {
     const elem = wrapper.find('button');
-
     expect(elem.length).toBe(1);
+  });
+
+  it('should call onImageChange', () => {
+
+  });
+
+  it('should call sendFileInfo', () => {
+    const spy = jest.fn();
+    wrapper = shallow(<ImageUpload imgFile={spy} />);
+    wrapper.find('button').simulate('click');
+    //18,19,21,22,27,39
+    expect(spy).toHaveBeenCalled();
   });
 });
 

@@ -40,7 +40,6 @@ describe('<MovieForm />', () => {
 
   it('should render a run time input and update the components state.runTime value onChange', () => {
     const elem = wrapper.find('#runTime');
-
     elem.simulate('change', { target: { name: 'runTime', value: 123 } });
 
     expect(elem.length).toBe(1);
@@ -61,7 +60,7 @@ describe('<MovieForm />', () => {
     expect(wrapper.state('type')).toEqual('tv');
   });
 
-  it('should render a star rating input', () => {
+  it('should render a star rating input and update the components state.rating onRate', () => {
     wrapper = mount(<MovieForm submit={jest.fn()} />);
     const elem = wrapper.find('#rating').at(0);
     elem.find('RatingIcon').at(3).simulate('click');
@@ -121,10 +120,11 @@ describe('<MovieForm />', () => {
   });
 
   it('should call submit', () => {
-    wrapper.setState({ title: 'Test title' });
+    wrapper.setState({ title: 'Test title', producers: 'producers',
+      director: 'director', plot: "plot", genre: "action", runTime: '123', releaseDate: '2018' });
+
     wrapper.find('Form').simulate('submit');
     expect(submit).toHaveBeenCalled();
-    expect(wrapper).toMatchSnapshot();
   });
 
   it('should call onInputChange', () => {

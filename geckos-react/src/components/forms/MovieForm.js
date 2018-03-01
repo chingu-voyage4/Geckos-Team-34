@@ -78,7 +78,7 @@ class MovieForm extends Component {
       genre, producers, runTime, loading, errors } = this.state;
 
     return (
-      <Form  loading={loading} onSubmit={this.onSubmit}>
+      <Form loading={loading} onSubmit={this.onSubmit}>
         <Form.Group >
           <Form.Field width={4} error={!!errors.title}>
             <label htmlFor="title">Title</label>
