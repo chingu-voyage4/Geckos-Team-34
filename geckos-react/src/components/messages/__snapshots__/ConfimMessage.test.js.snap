@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConfirmMessage /> should render correctly 1`] = `
+<ConfirmMessage>
+  <Message
+    info={true}
+  >
+    <div
+      className="ui info message"
+    >
+      <MessageHeader>
+        <div
+          className="header"
+        >
+          Verify your email!
+        </div>
+      </MessageHeader>
+    </div>
+  </Message>
+</ConfirmMessage>
+`;
