@@ -29,10 +29,10 @@ class MovieForm extends Component {
 
   validate = () => {
     const errors = {};
-    if(!validator.isLength( this.state.title, { min: 2, max: 32 })) errors.title = 'Invalid Movie Title';
-    if(!validator.isLength( this.state.director, { min: 2, max: 32 })) errors.director = 'Invalid Director Name';
-    if(!validator.isLength( this.state.producers, { min: 2, max: 32 })) errors.producers = 'Invalid Producer Name';
-    if(!validator.isLength( this.state.genre, { min: 2, max: 32 })) errors.genre = 'Invalid Genre Type';
+    if(!validator.isLength( this.state.title, { min: 2, max: 32 })) errors.title = 'Invalid movie title';
+    if(!validator.isLength( this.state.director, { min: 2, max: 32 })) errors.director = 'Invalid director name';
+    if(!validator.isLength( this.state.producers, { min: 2, max: 32 })) errors.producers = 'Invalid producer name';
+    if(!validator.isLength( this.state.genre, { min: 2, max: 32 })) errors.genre = 'Invalid genre type';
     if(validator.isEmpty(this.state.plot)) errors.plot = 'Hey, you need to add a plot';
     if(!validator.isNumeric(this.state.runTime)) errors.runTime = 'Numbers only please';
     if(!validator.isNumeric(this.state.releaseDate)) errors.releaseDate = 'Numbers only please';

@@ -38,7 +38,6 @@ describe('<ImageUpload />', () => {
     const spy = jest.fn();
     wrapper = shallow(<ImageUpload imgFile={spy} />);
     wrapper.find('button').simulate('click');
-    //18,19,21,22,27,39
     expect(spy).toHaveBeenCalled();
   });
 });
