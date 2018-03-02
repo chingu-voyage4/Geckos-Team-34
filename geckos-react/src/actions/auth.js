@@ -29,3 +29,30 @@ export const logout = () => {
     dispatch(userLoggedOut());
   };
 };
+
+export const confirm = (token) => {
+  return async(dispatch) => {
+    const user = await api.user.confirm(token);
+    localStorage.geckosJWT = user.token;
+    dispatch(userLoggedIn(user));
+  };
+};
+
+export const resetPassword = ({ email }) => {
+  return async() => {
+    const response = await api.user.resetPassword(email);
+    console.log(response);
+  };
+};
+
+export const validateToken = (token) => {
+  return async() => {
+    await api.user.validateToken(token);
+  };
+};
+
+export const resetUserPassword = (data) => {
+  return async() => {
+    await api.user.resetUserPassword(data);
+  };
+};

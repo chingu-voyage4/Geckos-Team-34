@@ -12,6 +12,7 @@ const DashboardPage = ({ isConfirmed }) => {
   return (
     <div className="ui container">
       { !isConfirmed && <ConfirmMessage /> }
+      <h1>Welcome!</h1>
     </div>
   );
 };

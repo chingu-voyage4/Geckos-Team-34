@@ -62,7 +62,7 @@ class RegisterForm extends Component {
         <Form.Field error={!!errors.email}>
           <label htmlFor="username">Username</label>
           <input
-            type="username"
+            type="text"
             id="username"
             name="username"
             placeholder="Superstar"
