@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 
 import routes from './routes';
 import authRoutes from './routes/auth';
+import blogRoutes from './routes/blog';
 
 dotenv.config();
 const app = express();
@@ -20,5 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', routes);
 app.use('/auth', authRoutes);
+app.use('/news', blogRoutes);
 
 export default app;
