@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import BlogPost from '../forms/CreateBlogPostForm';
+import api from '../../api';
 
 class CreateBlogPostPage extends Component {
   submit = async(data) => {
-    await axios.post('/news', data);
+    await api.blog.store(data);
   }
 
   render() {
