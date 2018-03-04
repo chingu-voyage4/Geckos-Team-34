@@ -8,7 +8,7 @@ function handleResponse(res, code, statusObj) {
   res.status(code).json(statusObj);
 }
 
-export const register = async(req, res, next) => {
+export const register = async(req, res) => {
   const { username, email, password } = req.body;
 
   const validationErrors = {};
