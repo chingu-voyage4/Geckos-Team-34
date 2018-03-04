@@ -9,9 +9,8 @@ export const store = async(req, res) => {
   const movie = Movie({ Title: title, Year: year, Rated: rated,
     Genre: genre, Plot: plot });
   try {
-    await movie.save();
-
-    handleResponse(res, 200, { status: "sucess", movie });
+    const newMovie = await movie.save();
+    handleResponse(res, 200, { status: "sucess", movie : newMovie });
   } catch(err) {
 
     handleResponse(res, 500, { status: "error", message: err });
