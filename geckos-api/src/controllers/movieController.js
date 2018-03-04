@@ -1,12 +1,19 @@
 import Movie from '../models/movie';
 
+function handleResponse(res, code, statusObj) {
+  res.status(code).json(statusObj);
+}
+
 export const store = async(req, res) => {
-  const { title } = req.body;
-  const movie = Movie({ Title: title });
+  const { title, year, rated, genre, plot } = req.body;
+  const movie = Movie({ Title: title, Year: year, Rated: rated,
+    Genre: genre, Plot: plot });
   try {
     await movie.save();
-    res.status(200).json({ status: 'success', movie });
+
+    handleResponse(res, 200, { status: "sucess", movie });
   } catch(err) {
-    res.status(400).json({ status: 'error', message: err });
+
+    handleResponse(res, 500, { status: "error", message: err });
   }
 };

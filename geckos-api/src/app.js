@@ -21,6 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', routes);
 app.use('/auth', authRoutes);
-app.use('/movies', movieRoutes);
+app.use('/movie', movieRoutes);
 
 export default app;
