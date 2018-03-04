@@ -31,20 +31,18 @@ export const index = async(req, res) => {
 
 export const show = async(req, res) => {
   try {
-    const blog = await Blog.findIdAndUpdate(req.params.id);
-    console.log(blog);
-    handleResponse(res, 200, { status: "success", blog });
+    const singlePost = await Blog.findByIdAndUpdate(req.params.id, { post: req.body.post });
+    handleResponse(res, 200, { status: "success", singlePost });
   } catch (err) {
     handleResponse(res, 500, { status: "error", message: err });
   }
 };
 
 export const remove = async(req, res) => {
-  console.log(req.body);
+
   try {
-    const post = await Blog.findByIdAndRemove(req.params._id, { post });
-    console.log(post);
-    handleResponse(res, 200, { status: "success", post });
+    const deleted = await Blog.findByIdAndRemove(req.params.id, { post: req.body.post });
+    handleResponse(res, 200, { status: "success", deleted });
   } catch (err) {
     handleResponse(res, 500, { status: "error", message: err });
   }
