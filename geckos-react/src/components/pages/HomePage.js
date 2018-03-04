@@ -3,6 +3,7 @@ import { func, bool } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import './HomePage.css';
 import { logout } from '../../actions/auth';
 
 const propTypes = {
@@ -12,7 +13,7 @@ const propTypes = {
 
 const HomePage = ({ isAuthenticated, logout }) => {
   return (
-    <div className="ui container">
+    <div className="ui container home-page">
       {
         isAuthenticated ?
           <button onClick={() => logout()}>logout</button>
