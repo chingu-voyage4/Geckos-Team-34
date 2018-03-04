@@ -19,10 +19,32 @@ export const store = async(req, res) => {
 };
 
 export const index = async(req, res) => {
-
   try {
     const posts = await Blog.find({});
+
     handleResponse(res, 200, { status: "success", posts });
+    console.log(blogs);
+  } catch (err) {
+    handleResponse(res, 500, { status: "error", message: err });
+  }
+};
+
+export const show = async(req, res) => {
+  try {
+    const blog = await Blog.findIdAndUpdate(req.params.id);
+    console.log(blog);
+    handleResponse(res, 200, { status: "success", blog });
+  } catch (err) {
+    handleResponse(res, 500, { status: "error", message: err });
+  }
+};
+
+export const remove = async(req, res) => {
+  console.log(req.body);
+  try {
+    const post = await Blog.findByIdAndRemove(req.params._id, { post });
+    console.log(post);
+    handleResponse(res, 200, { status: "success", post });
   } catch (err) {
     handleResponse(res, 500, { status: "error", message: err });
   }

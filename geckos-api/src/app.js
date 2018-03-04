@@ -22,5 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', routes);
 app.use('/auth', authRoutes);
 app.use('/news', blogRoutes);
+app.use('/news/:id', blogRoutes);
 
 export default app;
