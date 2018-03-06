@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import{ Form, Button, Rating, Menu } from 'semantic-ui-react';
+import{ Form, Button, Rating } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 
