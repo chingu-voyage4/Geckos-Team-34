@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import{ Form, Button, Rating } from 'semantic-ui-react';
+import{ Form, Button, Rating, Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
 
 import validator from 'validator';
 import InlineError from '../messages/InlineError';
@@ -12,10 +14,10 @@ class MovieForm extends Component {
     director: '',
     plot: '',
     language: '',
-    movieRating: '',
+    rated: '',
     rating: '',
     genre: '',
-    releaseDate: '',
+    released: '',
     producers: '',
     runTime: '',
     type: '',
@@ -35,7 +37,7 @@ class MovieForm extends Component {
     if(!validator.isLength( this.state.genre, { min: 2, max: 32 })) errors.genre = 'Invalid genre type';
     if(validator.isEmpty(this.state.plot)) errors.plot = 'Hey, you need to add a plot';
     if(!validator.isNumeric(this.state.runTime)) errors.runTime = 'Numbers only please';
-    if(!validator.isNumeric(this.state.releaseDate)) errors.releaseDate = 'Numbers only please';
+    if(!validator.isNumeric(this.state.released)) errors.released = 'Numbers only please';
 
     return errors;
   }
@@ -74,7 +76,7 @@ class MovieForm extends Component {
   }
 
   render() {
-    const { title, plot, language, movieRating, director, releaseDate,
+    const { title, plot, language, rated, director, released,
       genre, producers, runTime, loading, errors } = this.state;
 
     return (
@@ -95,15 +97,15 @@ class MovieForm extends Component {
             }
           </Form.Field>
           <Form.Field width={2} error={!!errors.releaseDate}>
-            <label htmlFor="releaseDate">Release Date</label>
+            <label htmlFor="released">Release Date</label>
             <input
               placeholder="2018"
               type="text"
               maxLength={4}
-              name="releaseDate"
-              id="releaseDate"
+              name="released"
+              id="released"
               onChange={this.onInputChange}
-              value={releaseDate}
+              value={released}
             />
             {
               errors.releaseDate && <InlineError message={errors.releaseDate} />
@@ -227,12 +229,12 @@ class MovieForm extends Component {
             </select>
           </Form.Field>
           <Form.Field width={2}>
-            <label htmlFor="movieRating">Rating</label>
+            <label htmlFor="rated">Rating</label>
             <select
-              name="movieRating"
-              id="movieRating"
+              name="rated"
+              id="rated"
               onChange={this.onInputChange}
-              value={movieRating}
+              value={rated}
             >
               <option value="g">G</option>
               <option value="pg">PG</option>
@@ -242,6 +244,9 @@ class MovieForm extends Component {
           </Form.Field>
         </Form.Group>
         <ImageUpload imgFile={this.getImgFile} />
+        <Button as={Link} to='/' secondary>
+          Cancel
+        </Button>
         <Button primary>Add Movie</Button>
       </Form>
     );
