@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import BlogPost from '../forms/CreateBlogPostForm';
+import { shape, func } from 'prop-types';
 import api from '../../api';
 
 class CreateBlogPostPage extends Component {
+
+  static propTypes = {
+    history: shape({ push: func })
+  }
+
   submit = async(data) => {
     await api.blog.store(data);
+    this.props.history.push('/news');
   }
 
   render() {
