@@ -1,14 +1,13 @@
 import express from 'express';
-import Blog from '../models/Blog';
 
 import * as blogController from '../controllers/blogController';
-
 
 const router = express.Router();
 
 router.post('/', blogController.store);
 router.get('/', blogController.index);
-router.put('/:id', blogController.show);
-router.delete('/:id', blogController.remove);
+router.get('/:id', blogController.show);
+router.put('/:id/edit', blogController.edit);
+router.delete('/:id', blogController.destroy);
 
 export default router;

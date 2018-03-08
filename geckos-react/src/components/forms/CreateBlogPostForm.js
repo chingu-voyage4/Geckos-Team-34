@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import{ Form, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 import validator from 'validator';
 import InlineError from '../messages/InlineError';
@@ -81,6 +82,7 @@ class BlogPost extends Component {
             errors.body && <InlineError message={errors.body} />
           }
         </Form.Field>
+        <Link to='/news'>Back to news</Link>
         <Button primary>Upload Post</Button>
       </Form>
     );

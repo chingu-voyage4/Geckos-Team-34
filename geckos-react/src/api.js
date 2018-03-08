@@ -38,6 +38,11 @@ export default {
       const response = await axios.post('/news', data);
       const apiResp = response.data;
       return apiResp;
+    },
+    index: async(data) => {
+      const response = await axios.get('/news', data);
+      const apiResp = response.data;
+      return apiResp;
     }
   }
 };
