@@ -23,18 +23,18 @@ export const register = async(req, res) => {
 
   if (Object.keys(validationErrors).length > 0) {
     handleResponse(res, 417, { status: 'error', details: validationErrors });
-  }
+  } else {
+    const user = User({ username, email });
+    user.setConfirmationToken();
+    user.hashPassword(password);
 
-  const user = User({ username, email });
-  user.setConfirmationToken();
-  user.hashPassword(password);
-
-  try {
-    const newUser = await user.save();
-    sendConfirmationEmail(newUser);
-    handleResponse(res, 200, { status: 'success' });
-  } catch(err) {
-    handleResponse(res, 500, { status: 'error', message: err });
+    try {
+      const newUser = await user.save();
+      sendConfirmationEmail(newUser);
+      handleResponse(res, 200, { status: 'success' });
+    } catch(err) {
+      handleResponse(res, 500, { status: 'error', message: err });
+    }
   }
 };
 
