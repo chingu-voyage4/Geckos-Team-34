@@ -26,8 +26,8 @@ export const index = async(req, res) => {
 
 export const show = async(req, res) => {
   try {
-    const singlePost = await Blog.findById({ _id: req.params.id });
-    handleResponse(res, 200, { status: "success", singlePost });
+    const post = await Blog.findById({ _id: req.params.id });
+    handleResponse(res, 200, { status: "success", post });
   } catch (err) {
     handleResponse(res, 500, { status: "error", message: err });
   }

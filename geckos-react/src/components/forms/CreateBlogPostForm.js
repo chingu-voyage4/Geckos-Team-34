@@ -82,7 +82,7 @@ class BlogPost extends Component {
             errors.body && <InlineError message={errors.body} />
           }
         </Form.Field>
-        <Link to='/news'>Back to news</Link>
+        <Button as={Link} to='/news'>Cancel</Button>
         <Button primary>Upload Post</Button>
       </Form>
     );
