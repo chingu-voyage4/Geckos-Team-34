@@ -18,8 +18,9 @@ const HomePage = ({ isAuthenticated, logout }) => {
         isAuthenticated ?
           <button onClick={() => logout()}>logout</button>
           :
-          <Link to='/login'>Login</Link>
+          <Link className="ui basic button right floated " to='/login'><i class="icon user secret"></i>Login</Link>          
       }
+      <Link className="ui basic button right floated " to='/AboutUs'><i class="icon users"></i>A Little About Us</Link>
       <h1>Home Page</h1>
     </div>
   );
