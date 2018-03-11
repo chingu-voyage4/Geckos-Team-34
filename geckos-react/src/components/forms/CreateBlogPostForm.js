@@ -23,7 +23,11 @@ class BlogPost extends Component {
   validate = (data) => {
     const errors = {};
     if(!validator.isLength( data.title, { min: 2, max: 32 })) errors.title = 'Invalid post title';
+<<<<<<< HEAD
     if(!validator.isLength( data.body, { min: 2, max: 2000 })) errors.body = 'Invalid post content';
+=======
+    if(!validator.isLength( data.body, { min: 2, max: 32 })) errors.body = 'Invalid post content';
+>>>>>>> a2031b7c8be295ce58138f98e0a889686b8613db
 
     return errors;
   }
@@ -82,7 +86,11 @@ class BlogPost extends Component {
             errors.body && <InlineError message={errors.body} />
           }
         </Form.Field>
+<<<<<<< HEAD
         <Button as={Link} to='/news'>Cancel</Button>
+=======
+        <Link to='/news'>Back to news</Link>
+>>>>>>> a2031b7c8be295ce58138f98e0a889686b8613db
         <Button primary>Upload Post</Button>
       </Form>
     );

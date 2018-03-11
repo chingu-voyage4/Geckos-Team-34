@@ -6,7 +6,10 @@ import cookieParser from 'cookie-parser';
 
 import routes from './routes';
 import authRoutes from './routes/auth';
+<<<<<<< HEAD
 import movieRoutes from './routes/movie';
+=======
+>>>>>>> a2031b7c8be295ce58138f98e0a889686b8613db
 import blogRoutes from './routes/blog';
 
 dotenv.config();
@@ -22,7 +25,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', routes);
 app.use('/auth', authRoutes);
+<<<<<<< HEAD
 app.use('/movie', movieRoutes);
+=======
+>>>>>>> a2031b7c8be295ce58138f98e0a889686b8613db
 app.use('/news', blogRoutes);
 app.use('/news/:id', blogRoutes);
 

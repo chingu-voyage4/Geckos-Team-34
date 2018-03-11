@@ -43,11 +43,14 @@ export default {
       const response = await axios.get('/news', data);
       const apiResp = response.data;
       return apiResp;
+<<<<<<< HEAD
     },
     show: async(data) => {
       const response = await axios.get('news/', data);
       const apiResp = response.data;
       return apiResp;
+=======
+>>>>>>> a2031b7c8be295ce58138f98e0a889686b8613db
     }
   }
 };
