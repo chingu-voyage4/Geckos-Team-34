@@ -23,7 +23,7 @@ class BlogPost extends Component {
   validate = (data) => {
     const errors = {};
     if(!validator.isLength( data.title, { min: 2, max: 32 })) errors.title = 'Invalid post title';
-    if(!validator.isLength( data.body, { min: 2, max: 32 })) errors.body = 'Invalid post content';
+    if(!validator.isLength( data.body, { min: 2, max: 2000 })) errors.body = 'Invalid post content';
 
     return errors;
   }

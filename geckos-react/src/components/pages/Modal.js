@@ -18,14 +18,14 @@ class ModalTemplate extends Component {
 
   render() {
     return (
-      <Modal
+      <Modal size='tiny'
         trigger={<Button onClick={this.handleOpen}>{this.props.btnText}</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
       >
         <Header content={this.props.header} />
-        <Modal.Content className="ui centered row">
-          <h2>Hey</h2>
+        <Modal.Content>
+          <h4>Hey,</h4>
           <p>{this.props.content}</p>
         </Modal.Content>
         <Modal.Actions>

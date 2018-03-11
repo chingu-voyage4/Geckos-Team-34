@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import api from '../../api';
 import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { shape, PropTypes } from 'prop-types';
 import ModalTemplate from '../pages/Modal';
+
+import './ShowBlogPost.css';
 
 class ShowBlogPost extends Component {
   state = {
@@ -18,16 +19,13 @@ class ShowBlogPost extends Component {
     body: PropTypes.string,
     history: shape({ push: PropTypes.func }),
     params: PropTypes.func,
+    match: PropTypes.object
   };
-
-  static defaultProps = {
-    match: ''
-  }
 
   async getData() {
     const { id } = this.props.match.params;
     await axios.get('/news/' + id)
-      .then((res) => {
+      .then(res => {
         this.setState(() => ({
           title: res.data.post.title,
           body: res.data.post.body
@@ -36,9 +34,7 @@ class ShowBlogPost extends Component {
   }
 
   componentDidMount() {
-    if(this.props.match !== '') {
-      this.getData();
-    }
+    this.getData();
   }
 
   onDelete = () => {
@@ -50,7 +46,7 @@ class ShowBlogPost extends Component {
 
   render() {
     return (
-      <div>
+      <div className="blog-post ui container">
         <h1>{this.state.title}</h1>
         <p>{this.state.body}</p>
         <Button as={Link} to='/news'>Return to news</Button>

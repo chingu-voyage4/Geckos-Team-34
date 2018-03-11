@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import api from '../../api';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
+import BlogListContainer from './BlogListContainer';
 
 class BlogIndex extends Component {
 
@@ -16,22 +16,30 @@ class BlogIndex extends Component {
     ]
   }
 
-  componentDidMount() {
-    axios.get('/news')
+  getData = async() => {
+    await axios.get('/news')
       .then(res => {
         this.setState(() => ({ blogs: res.data.posts }));
+        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  componentDidMount() {
+    this.getData();
+  }
+
   render() {
     const renderBlogs = this.state.blogs.map((blog, index) =>
       <div key={index}>
-        <Link to={`news/${blog._id}`}>
-          <h2 className='ui header'>{blog.title}</h2>
-        </Link>
+        <BlogListContainer
+          title={blog.title}
+          titleLinkTo={`news/${blog._id}`}
+          description={blog.body.substring(0, 200) + '...'}
+          buttonLinkTo={`news/${blog._id}`}
+        />
       </div>
     );
     return (
