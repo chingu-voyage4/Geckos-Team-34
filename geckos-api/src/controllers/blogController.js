@@ -34,8 +34,9 @@ export const show = async(req, res) => {
 };
 
 export const edit = async(req, res) => {
+  const { title, body } = req.body;
   try {
-    const editPost = await Blog.findByIdAndUpdate(req.params.id, { post: req.body.post });
+    const editPost = await Blog.findByIdAndUpdate(req.params.id, { $set: { title: title, body: body } });
     handleResponse(res, 200, { status: "success", editPost });
   } catch (err) {
     handleResponse(res, 500, { status: "error", message: err });

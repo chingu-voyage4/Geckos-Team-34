@@ -15,6 +15,7 @@ import PasswordResetPage from './components/pages/PasswordResetPage';
 import CreateBlogPostPage from './components/pages/CreateBlogPostPage';
 import BlogIndex from './components/pages/BlogIndex';
 import ShowBlogPost from './components/pages/ShowBlogPost';
+import EditBlogPost from './components/forms/EditBlogPost';
 
 const propTypes = {
   location: shape({
@@ -36,6 +37,7 @@ const App = ({ location }) => {
       <Route location={location} path='/blog/new_post' component={CreateBlogPostPage} exact />
       <Route location={location} path='/news' component={BlogIndex} exact />
       <Route location={location} path='/news/:id' component={ShowBlogPost} exact/>
+      <Route location={location} path='/news/:id/edit' component={EditBlogPost} exact/>
     </div>
   );
 };

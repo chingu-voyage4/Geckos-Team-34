@@ -20,7 +20,6 @@ class BlogIndex extends Component {
     await axios.get('/news')
       .then(res => {
         this.setState(() => ({ blogs: res.data.posts }));
-        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -32,8 +31,8 @@ class BlogIndex extends Component {
   }
 
   render() {
-    const renderBlogs = this.state.blogs.map((blog, index) =>
-      <div key={index}>
+    const renderBlogs = this.state.blogs.map((blog) =>
+      <div key={blog._id}>
         <BlogListContainer
           title={blog.title}
           titleLinkTo={`news/${blog._id}`}

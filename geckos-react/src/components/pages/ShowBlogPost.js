@@ -24,7 +24,7 @@ class ShowBlogPost extends Component {
 
   async getData() {
     const { id } = this.props.match.params;
-    await axios.get('/news/' + id)
+    await axios.get(`/news/${id}`)
       .then(res => {
         this.setState(() => ({
           title: res.data.post.title,
@@ -39,9 +39,14 @@ class ShowBlogPost extends Component {
 
   onDelete = () => {
     const { id } = this.props.match.params;
-    axios.delete('news/' + id)
+    axios.delete(`news/${id}`)
       .then(() => {this.props.history.push('/news');})
       .catch(err => {console.log(err);});
+  }
+
+  onEdit = () => {
+    const { id } = this.props.match.params;
+    this.props.history.push(`/news/${id}/edit`);
   }
 
   render() {
@@ -55,6 +60,7 @@ class ShowBlogPost extends Component {
           click={this.onDelete}
           btnText="Delete Post"
         />
+        <Button onClick={this.onEdit}>Edit Post</Button>
       </div>
     );
   }
