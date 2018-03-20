@@ -3,14 +3,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { shape, PropTypes } from 'prop-types';
-import ModalTemplate from '../pages/Modal';
+import ModalTemplate from '../pages/ModalTemplate';
 
 import './ShowBlogPost.css';
 
 class ShowBlogPost extends Component {
   state = {
     title: '',
-    body: ''
+    body: '',
   }
 
   static propTypes = {
@@ -54,7 +54,7 @@ class ShowBlogPost extends Component {
       <div className="blog-post ui container">
         <h1>{this.state.title}</h1>
         <p>{this.state.body}</p>
-        <Button as={Link} to='/news'>Return to news</Button>
+        <Button as={Link} to='/news'>Return to News</Button>
         <ModalTemplate
           content="Are you sure want to delete this post?"
           click={this.onDelete}

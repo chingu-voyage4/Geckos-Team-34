@@ -17,7 +17,7 @@ class CreateBlogPostPage extends Component {
   render() {
     return (
       <div className="ui container">
-        <h1>Create a Blog Post</h1>
+        <h1>Create a News Post</h1>
         <BlogPost submit={this.submit} />
       </div>
     );
