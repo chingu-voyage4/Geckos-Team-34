@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InlineError /> should render correctly 1`] = `
+<InlineError
+  message="This is a test error"
+>
+  <span
+    style={
+      Object {
+        "color": "#dc2f2f",
+      }
+    }
+  >
+    This is a test error
+  </span>
+</InlineError>
+`;

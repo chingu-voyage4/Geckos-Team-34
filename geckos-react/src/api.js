@@ -32,5 +32,27 @@ export default {
       const apiResp = response.data;
       return apiResp;
     }
+  },
+  blog: {
+    store: async(data) => {
+      const response = await axios.post('/news', data);
+      const apiResp = response.data;
+      return apiResp;
+    },
+    index: async(data) => {
+      const response = await axios.get('/news', data);
+      const apiResp = response.data;
+      return apiResp;
+    },
+    show: async(data) => {
+      const response = await axios.get('news/', data);
+      const apiResp = response.data;
+      return apiResp;
+    },
+    edit: async(data) => {
+      const response = await axios.put('/news/:id', data);
+      const apiResp = response.data;
+      return apiResp;
+    }
   }
 };
