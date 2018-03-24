@@ -32,5 +32,12 @@ export default {
       const apiResp = response.data;
       return apiResp;
     }
+  },
+  movie: {
+    store: async(data) => {
+      const response = await axios.post('/movie', data);
+      const apiResp = response.data;
+      return apiResp;
+    }
   }
 };

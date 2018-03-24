@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import{ Dropdown, Form, Button, Rating, Input } from 'semantic-ui-react';
-import ImageUpload from '../imageUpload';
+import{ Form, Button, Rating } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
+
+import validator from 'validator';
+import InlineError from '../messages/InlineError';
+import ImageUpload from '../ImageUpload';
 import PropTypes from 'prop-types';
 
 class MovieForm extends Component {
@@ -9,15 +14,32 @@ class MovieForm extends Component {
     director: '',
     plot: '',
     language: '',
-    movieRating: '',
-    rating: 0,
+    rated: '',
+    rating: '',
     genre: '',
-    releaseDate: '',
-    producers: ''
+    released: '',
+    producers: '',
+    runTime: '',
+    type: '',
+    errors: {},
+    loading: false
   }
 
   static propTypes = {
     submit: PropTypes.func.isRequired
+  }
+
+  validate = () => {
+    const errors = {};
+    if(!validator.isLength( this.state.title, { min: 2, max: 32 })) errors.title = 'Invalid movie title';
+    if(!validator.isLength( this.state.director, { min: 2, max: 32 })) errors.director = 'Invalid director name';
+    if(!validator.isLength( this.state.producers, { min: 2, max: 32 })) errors.producers = 'Invalid producer name';
+    if(!validator.isLength( this.state.genre, { min: 2, max: 32 })) errors.genre = 'Invalid genre type';
+    if(validator.isEmpty(this.state.plot)) errors.plot = 'Hey, you need to add a plot';
+    if(!validator.isNumeric(this.state.runTime)) errors.runTime = 'Numbers only please';
+    if(!validator.isNumeric(this.state.released)) errors.released = 'Numbers only please';
+
+    return errors;
   }
 
   onInputChange = (e) => {
@@ -29,29 +51,38 @@ class MovieForm extends Component {
   }
 
   onRateChange = (e, { rating }) =>  {
-    this.setState({ rating })
+    const stateObj = { rating };
+    this.setState(stateObj);
   }
 
   onTypeChange = (e, { value }) => {
-    this.setState({ value })
+    const stateObj = { type: value };
+    this.setState(stateObj);
   }
 
   onSubmit = () => {
-    this.props.submit(this.state);
+    const errors = this.validate(this.state);
+    this.setState(() => ({ errors }));
+
+    if (Object.keys(errors).length === 0) {
+      this.setState(() => ({ loading : true }));
+      this.props.submit(this.state);
+    }
   }
 
-  myCallBack = (dataFromChild) => {
-   console.log(dataFromChild);
+  getImgFile = (imgFile) => {
+    const stateObj = { uploadedImage: imgFile };
+    this.setState(stateObj);
   }
 
   render() {
-    const { title, plot, language, movieRating, director, rating, releaseDate,
-      genre, type, producers, value, runTime } = this.state;
+    const { title, plot, language, rated, director, released,
+      genre, producers, runTime, loading, errors } = this.state;
 
     return (
-      <Form onSubmit={this.onSubmit}>
+      <Form loading={loading} onSubmit={this.onSubmit}>
         <Form.Group >
-          <Form.Field width={4}>
+          <Form.Field width={4} error={!!errors.title}>
             <label htmlFor="title">Title</label>
             <input
               type="text"
@@ -61,36 +92,55 @@ class MovieForm extends Component {
               onChange={this.onInputChange}
               value={title}
             />
+            {
+              errors.title && <InlineError message={errors.title} />
+            }
           </Form.Field>
-          <Form.Field width={2}>
-            <label htmlFor="releaseDate">Release Date</label>
+          <Form.Field width={2} error={!!errors.releaseDate}>
+            <label htmlFor="released">Release Date</label>
             <input
               placeholder="2018"
               type="text"
               maxLength={4}
-              name="releaseDate"
-              id="releaseDate"
+              name="released"
+              id="released"
               onChange={this.onInputChange}
-              value={releaseDate}
+              value={released}
             />
+            {
+              errors.releaseDate && <InlineError message={errors.releaseDate} />
+            }
           </Form.Field>
-          <Form.Field width={2}>
+          <Form.Field width={2} error={!!errors.runTime}>
             <label htmlFor="runTime">Run Time(mins)</label>
             <input
               placeholder="120"
               type="text"
               maxLength={3}
               name="runTime"
-              id="runtime"
+              id="runTime"
               onChange={this.onInputChange}
               value={runTime}
             />
+            {
+              errors.runTime && <InlineError message={errors.runTime} />
+            }
           </Form.Field>
         </Form.Group>
         <Form.Group inline>
           <label>Type</label>
-          <Form.Radio label='Movie' name="movie" value="movie" checked={value === "movie"} onChange={this.onTypeChange} />
-          <Form.Radio label='TV' name="tv" value="tv" checked={value === "tv"} onChange={this.onTypeChange} />
+          <Form.Radio label='Movie'
+            name="type"
+            value="movie"
+            checked={this.state.type === "movie"}
+            onChange={this.onTypeChange}
+          />
+          <Form.Radio label='TV'
+            name="type"
+            value="tv"
+            checked={this.state.type === "tv"}
+            onChange={this.onTypeChange}
+          />
         </Form.Group>
         <Form.Group inline>
           <label htmlFor="rating">Your rating</label>
@@ -105,7 +155,7 @@ class MovieForm extends Component {
           </Rating>
         </Form.Group>
         <Form.Group>
-          <Form.Field width={2}>
+          <Form.Field width={2} error={!!errors.genre}>
             <label htmlFor="genre">Genre</label>
             <input
               type="text"
@@ -115,8 +165,11 @@ class MovieForm extends Component {
               onChange={this.onInputChange}
               value={genre}
             />
+            {
+              errors.genre && <InlineError message={errors.genre} />
+            }
           </Form.Field>
-          <Form.Field width={4}>
+          <Form.Field width={4} error={!!errors.director}>
             <label htmlFor="director">Director</label>
             <input
               type="text"
@@ -126,8 +179,11 @@ class MovieForm extends Component {
               onChange={this.onInputChange}
               value={director}
             />
+            {
+              errors.director && <InlineError message={errors.director} />
+            }
           </Form.Field>
-          <Form.Field width={4}>
+          <Form.Field width={4} error={!!errors.producers}>
             <label htmlFor="producers">Producers</label>
             <input
               type="text"
@@ -137,9 +193,12 @@ class MovieForm extends Component {
               onChange={this.onInputChange}
               value={producers}
             />
+            {
+              errors.producers && <InlineError message={errors.producers} />
+            }
           </Form.Field>
         </Form.Group>
-        <Form.Field width={8}>
+        <Form.Field width={8} error={!!errors.plot}>
           <label htmlFor="plot">Plot</label>
           <textarea
             name="plot"
@@ -150,6 +209,9 @@ class MovieForm extends Component {
             value={plot}
           >
           </textarea>
+          {
+            errors.plot && <InlineError message={errors.plot} />
+          }
         </Form.Field>
         <Form.Group>
           <Form.Field width={2}>
@@ -167,12 +229,12 @@ class MovieForm extends Component {
             </select>
           </Form.Field>
           <Form.Field width={2}>
-            <label htmlFor="movieRating">Rating</label>
+            <label htmlFor="rated">Rating</label>
             <select
-              name="movieRating"
-              id="movieRating"
+              name="rated"
+              id="rated"
               onChange={this.onInputChange}
-              value={movieRating}
+              value={rated}
             >
               <option value="g">G</option>
               <option value="pg">PG</option>
@@ -181,7 +243,10 @@ class MovieForm extends Component {
             </select>
           </Form.Field>
         </Form.Group>
-        <ImageUpload callbackFromParent={this.myCallback} />
+        <ImageUpload imgFile={this.getImgFile} />
+        <Button as={Link} to='/' secondary>
+          Cancel
+        </Button>
         <Button primary>Add Movie</Button>
       </Form>
     );
